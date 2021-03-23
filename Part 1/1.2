@@ -1,0 +1,9 @@
+ sudo docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS     NAMES
+633c83cc1d6b   nginx     "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes   80/tcp    epic_swirles
+
+sudo docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS     NAMES
+633c83cc1d6b   nginx     "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes   80/tcp    epic_swirles
+
+The container was not stopped, and prune did not remove running container and its image. With docker container stop 63, and then pruning, the last one would be removed too.

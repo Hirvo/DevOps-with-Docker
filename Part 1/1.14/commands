@@ -1,0 +1,2 @@
+backend: sudo docker run -p 8080:8080 helloback2 
+frontend: sudo docker run -p 5000:5000 hellofront2

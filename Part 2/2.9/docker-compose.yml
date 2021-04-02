@@ -1,0 +1,51 @@
+version: '3.5' 
+
+services: 
+
+    frontend: 
+      build: 
+        context: ./Front
+        dockerfile: Dockerfilefrontend
+      environment:
+          REACT_APP_BACKEND_URL: http://localhost:8080      
+      ports:
+        - 5000:5000
+
+    backend: 
+       build: 
+         context: ./Back
+         dockerfile: Dockerfilebackend
+       environment:
+          REQUEST_ORIGIN: http://localhost:5000
+          REDIS_HOST: redis
+          POSTGRES_HOST: postgres
+          POSTGRES_USER: postgres 
+          POSTGRES_PASSWORD: example
+          POSTGRES_DATABASE: postgres
+       ports:
+        - 8080:8080
+
+    redis:
+      image: library/redis 
+      container_name: cache
+      ports:
+        - '6379:6379'
+      volumes:
+        - ./databaseredis:/data
+
+    postgres:
+      image: postgres:latest
+      restart: unless-stopped
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: example
+        POSTGRES_DB: postgres
+      container_name: postgres
+      ports:
+        - 5432:5432
+      volumes:
+        - ./database:/var/lib/postgresql/data
+
+
+
+    
